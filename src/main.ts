@@ -204,3 +204,13 @@ viewportGrid.layouts = {
 };
 
 viewportGrid.layout = "main";
+
+window.addEventListener("thatOpen", async (event: any) => {
+  const { name, payload } = event.detail;
+  if (name === "openModel") {
+    const { name, buffer } = payload;
+    const model = await ifcLoader.load(buffer, name);
+    const scene = viewer.scene.get();
+    scene.add(model);
+  }
+});
